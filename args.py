@@ -3,7 +3,7 @@ import os
  
 parser = argparse.ArgumentParser()
 parser.add_argument("--model_name_or_path", type=str, default="roberta-base")
-parser.add_argument("--dataset_path", type=str, default="../work/data/datasets_ic/")
+parser.add_argument("--dataset_path", type=str, default="")
 parser.add_argument("--dataset", type=str, default="mrpc")
 parser.add_argument("--task", type=str, default="mrpc")
 parser.add_argument("--bs", type=int, default=50)
