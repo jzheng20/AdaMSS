@@ -8,7 +8,7 @@ This repository contains the official PyTorch implementation of **AdaMSS (Adapti
 ##  🔧 Installation
 
 ```bash
-git clone https://github.com/your-org/AdaMSS.git
+git clone https://github.com/jzheng20/AdaMSS.git
 cd AdaMSS
 conda create -n adamss python=3.12.2
 conda activate adamss
