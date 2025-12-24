@@ -76,6 +76,7 @@ mkdir -p log
 
 CUDA_VISIBLE_DEVICES=0 python exec_adamss.py \
     --model-name-or-path google/${model} \
+    --dataset_path  \
     --dataset-name cars \
     --target_KK 200 \
     --head_lr "$head_lr" \
