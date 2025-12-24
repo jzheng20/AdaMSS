@@ -84,7 +84,7 @@ CUDA_VISIBLE_DEVICES=0 python exec_adamss.py \
     --num_epochs 10 \
     --mode adamss \
     --adamss_R 100\
-    --adamss_K 10\
+    --adamss_K 16\
     --tt 3\
     --seed "$seed" \
     --adamss_ri "$ri"\
