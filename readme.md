@@ -13,12 +13,17 @@ cd AdaMSS
 conda create -n adamss python=3.12.2
 conda activate adamss
 pip install -r requirements.txt
+```
 
+## 📄 Citation
 
-## If you find this work or code useful, please consider citing:
+If you find this work or code useful, please consider citing:
 
-@inproceedings{zhengadamss,
+```BibTeX
+@inproceedings{zheng2025adamss,
   title={AdaMSS: Adaptive Multi-Subspace Approach for Parameter-Efficient Fine-Tuning},
   author={Zheng, Jingjing and Lu, Wanglong and Dong, Yiming and Ji, Chaojie and Cao, Yankai and Lin, Zhouchen},
-  booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems}
+  booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
+  year={2025},
 }
+```
