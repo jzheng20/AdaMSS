@@ -210,7 +210,7 @@ class SubspacesAllocator(object):
  
         if mask_ind:  
             mask_threshold, model = self.mask_to_target(model) 
-            from LorRAv2.utils import print_trainable_parameters 
+            from adamss_pkg.utils import print_trainable_parameters 
             print_trainable_parameters(model) 
         else:
             mask_threshold = None  
