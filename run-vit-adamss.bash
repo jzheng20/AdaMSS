@@ -1,6 +1,6 @@
 
 #!/bin/bash
-export HF_HOME="/home/jzheng2023/work/.cache"
+#export HF_HOME="/home/jzheng2023/work/.cache"
 
  
  
@@ -31,11 +31,11 @@ valid_seeds=(
 
  
 data_name="${1:-cars}" 
-model="${2:-vit-base-patch16-224-in21k}" 
+model="${2:-vit-large-patch16-224-in21k}" 
 head_lr="${3:-0.005}"
 fft_lr="${4:-0.01}"
 weight_decay="${5:-0.1}"
-ri="${6:-3}"
+ri="${6:-1}"
 seed="${7:-7}"
 
 
@@ -75,7 +75,7 @@ mkdir -p log
 
 
 CUDA_VISIBLE_DEVICES=0 python exec_adamss.py \
-    --model-name-or-path ../work/models/PretrainedModels/google/${model} \
+    --model-name-or-path google/${model} \
     --dataset-name cars \
     --target_KK 200 \
     --head_lr "$head_lr" \
@@ -85,7 +85,7 @@ CUDA_VISIBLE_DEVICES=0 python exec_adamss.py \
     --mode adamss \
     --adamss_R 100\
     --adamss_K 10\
-    --tt 0.01\
+    --tt 3\
     --seed "$seed" \
     --adamss_ri "$ri"\
     --init_warmup 1 \
