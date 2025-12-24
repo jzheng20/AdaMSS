@@ -69,7 +69,7 @@ class SubspacesAllocator(object):
 
     def update_ipt(self, model): 
         for n,p in model.named_parameters():
-            if "lorrasa_" in n and p.grad is not None: 
+            if "adamss_" in n and p.grad is not None: 
                 if n not in self.ipt:
                     self.ipt[n] = torch.zeros_like(p)
                     self.exp_avg_ipt[n] = torch.zeros_like(p) 
@@ -107,13 +107,13 @@ class SubspacesAllocator(object):
         combine_dict = {}  
         # Calculate the importance score for each sub matrix 
         for n,p in model.named_parameters(): 
-            if "lorrasa_A" in n and p.grad is not None:  
-                name_mat = n.replace("lorrasa_A", "%s")
+            if "adamss_A" in n and p.grad is not None:  
+                name_mat = n.replace("adamss_A", "%s")
                 if name_mat not in combine_dict: 
                     combine_dict[name_mat] = [0.0]
                     total_KK=total_KK+1
-            if "lorrasa_B" in n and p.grad is not None:  
-                name_mat = n.replace("lorrasa_B", "%s") 
+            if "adamss_B" in n and p.grad is not None:  
+                name_mat = n.replace("adamss_B", "%s") 
                 if name_mat not in combine_dict: 
                     combine_dict[name_mat] = [0.0]
                     total_KK=total_KK+1
@@ -127,20 +127,20 @@ class SubspacesAllocator(object):
         combine_dict = {}  
         # Calculate the importance score for each sub matrix 
         for n,p in model.named_parameters(): 
-            if "lorrasa_A" in n and p.grad is not None: 
+            if "adamss_A" in n and p.grad is not None: 
                 rdim, hdim_a = p.shape
                 ipt_score = self.calculate_score(n, metric="ipt")
                 comb_ipt = torch.mean(ipt_score)
-                name_mat = n.replace("lorrasa_A", "%s") 
+                name_mat = n.replace("adamss_A", "%s") 
                 if name_mat not in combine_dict: 
                     combine_dict[name_mat] = [comb_ipt] 
                 else:
                     combine_dict[name_mat].append(comb_ipt)
-            if "lorrasa_B" in n and p.grad is not None: 
+            if "adamss_B" in n and p.grad is not None: 
                 hdim_b, rdim = p.shape 
                 ipt_score = self.calculate_score(n, metric="ipt")
                 comb_ipt = torch.mean(ipt_score) 
-                name_mat = n.replace("lorrasa_B", "%s") 
+                name_mat = n.replace("adamss_B", "%s") 
                 if name_mat not in combine_dict: 
                     combine_dict[name_mat] = [comb_ipt] 
                 else:
@@ -165,11 +165,11 @@ class SubspacesAllocator(object):
  
         with torch.no_grad(): 
             for n,p in model.named_parameters():
-                 if "lorrasa" in n and p.grad is not None:
-                     if "lorrasa_A" in n:
-                         name_mat = n.replace("lorrasa_A", "%s")
+                 if "adamss" in n and p.grad is not None:
+                     if "adamss_A" in n:
+                         name_mat = n.replace("adamss_A", "%s")
                      else:
-                         name_mat = n.replace("lorrasa_B", "%s")
+                         name_mat = n.replace("adamss_B", "%s")
                          
                      if is_dict[name_mat]>mask_threshold:
                          p.requires_grad = True
