@@ -27,3 +27,7 @@ If you find this work or code useful, please consider citing:
   year={2025},
 }
 ```
+
+## 📦 PEFT Integration (Coming Soon)
+
+We are actively working on releasing **AdaMSS as a standalone PEFT package**, with a unified and user-friendly API compatible with the HuggingFace ecosystem.
