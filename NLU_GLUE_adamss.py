@@ -72,7 +72,7 @@ for seed in seeds:
         tokenizer.pad_token_id = tokenizer.eos_token_id
     
  
-    datasets = load_dataset(args.dataset_path+"glue/"+task)  
+    datasets = load_dataset("glue",task)  
     #metric=load_metric("glue",task)  
     from evaluate import load
     metric = load("lrr_pkg/evaluate/metrics/glue/glue.py", task) 
