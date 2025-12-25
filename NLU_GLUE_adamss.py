@@ -16,17 +16,7 @@ import time
 import torch
 import numpy as np
 from torch.optim import AdamW
-from torch.utils.data import DataLoader
-#from peft import (
-#    get_peft_config,
-#    get_peft_model,
-#    get_peft_model_state_dict,
- #   set_peft_model_state_dict,
-#    LoraConfig, 
-#    PeftType,
-#    PrefixTuningConfig,
-#    PromptEncoderConfig, 
-#)
+from torch.utils.data import DataLoader 
 from datasets import load_dataset, load_metric
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, get_linear_schedule_with_warmup, set_seed
 from tqdm import tqdm
@@ -46,8 +36,7 @@ def set_tM_trainable(model,module_name):
     return None
 
 args = get_args() 
-print(args.weight_decay)
-#seeds=np.array([44444]) #,11111,22222,33333,,44444
+print(args.weight_decay) 
 seeds=np.array([args.seed])  
 for seed in seeds:
     args.seed=seed
@@ -137,21 +126,9 @@ for seed in seeds:
     eval_dataloader = DataLoader(tokenized_datasets["validation"], shuffle=False, collate_fn=collate_fn, batch_size=args.bs)
 
  
-    for fft_lr in np.array([1e-3]): #1e-1,1e-2,1e-3
-        for head_lr in np.array([5e-2]):#5e-2,0.0005,5e-5
-            for weight_decay in np.array([0]):#5e-2, 5e-3,5e-4,0
-                #args.adamss_K=10
-                # args.fft_lr=fft_lr#1e-3
-                # args.head_lr=head_lr
-                # args.weight_decay= weight_decay
-                
-                print("hahahaha")
-                print(args.head_lr)
-                print(args.fft_lr)
-                print(args.weight_decay)
-                print(args.adamss_K)
-                print(args.adamss_ri)
-                print(args.adamss_R)
+    for fft_lr in np.array([1e-3]):  
+        for head_lr in np.array([5e-2]): 
+            for weight_decay in np.array([0]):  
                 model = AutoModelForSequenceClassification.from_pretrained(args.model_name_or_path,num_labels=num_labels,return_dict=True)
                 from adamss_pkg import AdaMSSModel,utilized
                 for param in model.parameters():
@@ -161,31 +138,17 @@ for seed in seeds:
                 if "base" in args.model_name_or_path:
                     target_size=np.array([12,768,768])
                 elif "large" in args.model_name_or_path:
-                    target_size=np.array([24,1024,1024])
-                # if "base" in args.model_name_or_path:
-                #        FoDs_size = [{"num_layers": 12,"ch": len(qkv_name[0]),"d_model": 768,"d_k": 768},
-                #                     {"num_layers": 12,"ch": len(qkv_name[0]),"d_model": 768,"d_k": 768}] 
-                # else:
-                #        FoDs_size = [{"num_layers": 24,"ch": len(qkv_name[0]),"d_model": 1024,"d_k": 1024},
-                #                     {"num_layers": 24,"ch": len(qkv_name[0]),"d_model": 1024,"d_k": 1024}] 
-
+                    target_size=np.array([24,1024,1024]) 
                 FoDs_size = [{"num_layers": target_size[0],"ch": len(qkv_name[0]),"d_model": target_size[1],"d_k": target_size[2]},
                         {"num_layers": target_size[0],"ch": len(qkv_name[0]),"d_model": target_size[1],"d_k": target_size[2]}] 
-                args.ll=12*768*2
-                # r=100
+                args.ll=12*768*2 
                 print(args)
-                args.adamss_p=0.2 
-                # args.target_KK=10
+                args.adamss_p=0.2  
                 model, args.KK=AdaMSSModel.Loading(args, model, FoDs_size,qkv_name,device)
                 print(args.KK)
-    
-                #for param in model.parameters():
-                     #   param.requires_grad = False 
+     
                 utilized.set_extra_trainable(model, ["classifier"]) 
-                utilized.print_requires_grad(model)
-                #set_tM_trainable(model,["query","value"])
-                #utilized.print_requires_grad(model)
-                #print(model) 
+                utilized.print_requires_grad(model) 
                 head_param = list(map(id, model.classifier.parameters()))
 
                 others_param = filter(lambda p: id(p) not in head_param, model.parameters()) 
@@ -218,9 +181,7 @@ for seed in seeds:
                 print(max_steps)
                 total_KK=int(sum(args.KK[0]))
                 from adamss_pkg.utils import print_trainable_parameters
-                print_trainable_parameters(model)
-                #print(dir())
-                #print(globals())
+                print_trainable_parameters(model) 
                 import time
                 start = time.time()
                 for epoch in range(args.num_epochs):
@@ -234,26 +195,14 @@ for seed in seeds:
                         loss.backward()
                         if step == 0:
                             print_memory_usage()
-                        optimizer.step()
-                        #if step == 0: 
+                        optimizer.step() 
                       
                         lr_scheduler.step()
                         if subspaces_allocator is not None and step == 0:
                              mask_threshold, model =  subspaces_allocator.update_and_mask(model, epoch)
-        
-                        if step == 0: #step % 100 == 0:
-                            torch.cuda.empty_cache() 
-                            print(f"Max allocated memory for Net1: {torch.cuda.max_memory_allocated() / 1024**2:.2f} MB")
-                            torch.cuda.reset_peak_memory_stats()
-                            
-                             # for param in model.parameters():
-                             #     param.requires_grad = False
-                        optimizer.zero_grad()
-                        #torch.cuda.empty_cache()
-                        # head_param = list(map(id, model.classifier.parameters()))
-                        # others_param = filter(lambda p: id(p) not in head_param and p.requires_grad, model.parameters())  
-                        # optimizer = AdamW([{"params": model.classifier.parameters(), "lr": args.head_lr},{"params": others_param,                         "lr":args.fft_lr}],weight_decay=args.weight_decay)
-                        
+         
+                             
+                        optimizer.zero_grad() 
 
                     model.eval()
                     for step, batch in enumerate(tqdm(eval_dataloader)):
