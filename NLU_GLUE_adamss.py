@@ -72,7 +72,8 @@ for seed in seeds:
         tokenizer.pad_token_id = tokenizer.eos_token_id
     
  
-    datasets = load_dataset("glue",task)  
+    datasets = load_dataset("glue",task) 
+    #datasets = load_dataset(args.dataset_path+"datasets_nlu/glue/glue/"+task) 
     #metric=load_metric("glue",task)  
     from evaluate import load
     metric = load("lrr_pkg/evaluate/metrics/glue/glue.py", task) 
@@ -142,10 +143,9 @@ for seed in seeds:
                 FoDs_size = [{"num_layers": target_size[0],"ch": len(qkv_name[0]),"d_model": target_size[1],"d_k": target_size[2]},
                         {"num_layers": target_size[0],"ch": len(qkv_name[0]),"d_model": target_size[1],"d_k": target_size[2]}] 
                 args.ll=12*768*2 
-                print(args)
                 args.adamss_p=0.2  
                 model, args.KK=AdaMSSModel.Loading(args, model, FoDs_size,qkv_name,device)
-                print(args.KK)
+            
      
                 utilized.set_extra_trainable(model, ["classifier"]) 
                 utilized.print_requires_grad(model) 
