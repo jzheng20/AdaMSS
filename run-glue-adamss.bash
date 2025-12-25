@@ -76,7 +76,6 @@ mkdir -p log
 #nohup env 
 CUDA_VISIBLE_DEVICES=0 python NLU_GLUE_adamss.py \
     --model_name_or_path FacebookAI/${model} \
-    --dataset_path  \
     --task "$data_name" \
     --max_length 512 \
     --head_lr "$head_lr" \
