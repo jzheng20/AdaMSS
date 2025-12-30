@@ -31,3 +31,11 @@ If you find this work or code useful, please consider citing:
 ## 📦 PEFT Integration (Coming Soon)
 
 We are actively working on releasing **AdaMSS as a standalone PEFT package**, with a unified and user-friendly API compatible with the HuggingFace ecosystem.
+
+
+## Results on GLUE
+
+| Model | cola |mrpc |qnli |rte | sst2 | stsb | Avg.
+|-------|----|----| ----| ----| ----| ----| ----|  
+| AdaMSS_base (K=10, rk=1) | 0.6882 ± 0.0153  | 0.9005 ± 0.0063|0.9424 ± 0.0026|  0.8838 ± 0.0065| 0.9631 ± 0.0017|0.9181 ± 0.0021|0.8827|
+| AdaMSS  (K=10, rk=1) | 0.6866 ± 0.0064 |0.8985 ± 0.0037 |0.9426 ± 0.0019 |0.8744 ± 0.0077 |0.9612 ± 0.0015 |0.9178 ± 0.0019 |0.8802 | 
