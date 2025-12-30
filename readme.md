@@ -33,7 +33,7 @@ If you find this work or code useful, please consider citing:
 We are actively working on releasing **AdaMSS as a standalone PEFT package**, with a unified and user-friendly API compatible with the HuggingFace ecosystem.
 
 
-## Results on GLUE
+## Results on GLUE for given subspace number K=10
 
 | Model | cola |mrpc |qnli |rte | sst2 | stsb | Avg.
 |-------|----|----| ----| ----| ----| ----| ----|  
