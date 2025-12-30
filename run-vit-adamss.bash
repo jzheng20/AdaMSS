@@ -65,7 +65,7 @@ echo "Model: $model"
 echo "head_lr: $head_lr" 
 echo "fft_lr: $fft_lr" 
 echo "weight_decay: $weight_decay" 
-echo "r: $r" 
+echo "r: $ri" 
 echo "seed: $seed" 
 echo "Check exec_adamss_${sanitized_model}_${data_name}_head_lr${head_lr}_fft_lr${fft_lr}_weight_decay${weight_decay}_seed${seed}_r${r}.log for details."
 echo "================================================================="
@@ -76,7 +76,7 @@ mkdir -p log
 
 CUDA_VISIBLE_DEVICES=0 python exec_adamss.py \
     --model-name-or-path google/${model} \
-    --dataset-name cars \
+    --dataset-name "$data_name" \
     --target_KK 200 \
     --head_lr "$head_lr" \
     --weight_decay "$weight_decay" \
