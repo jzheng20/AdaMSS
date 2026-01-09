@@ -4,7 +4,6 @@
 This repository contains the official PyTorch implementation of **AdaMSS (Adaptive Multi-Subspace Approach)**, a parameter-efficient fine-tuning (PEFT) method designed to improve the expressiveness–efficiency trade-off in fine-tuning of large models.
 
 
-
 ##  🔧 Installation
 
 ```bash
@@ -31,6 +30,7 @@ If you find this work or code useful, please consider citing:
 ## 📦 PEFT Integration (Coming Soon)
 
 We are actively working on releasing **AdaMSS as a standalone PEFT package**, with a unified and user-friendly API compatible with the HuggingFace ecosystem.
+Please check here for more details of peft integration: (AdaMSS-PEFT)[https://github.com/huggingface/peft/pull/2967] 
 
 
 ## Results on GLUE for given subspace number K=10 (hyperparameter configuration follows the AdaMSS paper), evaluated on an NVIDIA Tesla V100 (32 GB).
