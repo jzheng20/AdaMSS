@@ -10,7 +10,6 @@ valid_data_names=(
     "qnli"
     "rte"
     "stsb"
-    "wnli"
     "mrpc"
     "sst2"
 )
