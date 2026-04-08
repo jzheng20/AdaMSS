@@ -51,7 +51,7 @@ from peft import AdamssConfig, get_peft_model
 config = AdamssConfig(
     r=100,                          # SVD rank (full decomposition rank)
     num_subspaces=10,               # Number of subspaces (K) - initial capacity
-    subspace_rank=1,                # Rank per subspace (ri) - use 1 for NLU, 3 for Vision
+    subspace_rank=3,                # Rank per subspace (ri) - use 1 for NLU, 3 for Vision
     target_modules=["query", "value"],  # Target attention layers
     modules_to_save=["classifier"], # Modules to train without decomposition
 )
