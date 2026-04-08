@@ -27,9 +27,7 @@ If you find this work or code useful, please consider citing:
 }
 ```
 
-## 📦 PEFT Integration
 
-Our AdaMSS has been integrated into the PEFT package!!!! Please check here for more details of peft integration: [AdaMSS-PEFT](https://github.com/huggingface/peft/tree/main/examples/adamss_finetuning)
 
 
 ## Results on GLUE for given subspace number K=10 (hyperparameter configuration follows the AdaMSS paper), evaluated on an NVIDIA Tesla V100 (32 GB).
@@ -38,3 +36,8 @@ Our AdaMSS has been integrated into the PEFT package!!!! Please check here for m
 |-------|----|----|----| ----| ----| ----| ----| ----|  
 | AdaMSS_base (K=10, r_k=1) | 0.097M |0.6882 ± 0.0153  | 0.9005 ± 0.0063|0.9424 ± 0.0026|  0.8838 ± 0.0065| 0.9631 ± 0.0017|0.9181 ± 0.0021|0.8827|
 | AdaMSS  (K=10, r_k=1) |  0.045M | 0.6866 ± 0.0064 |0.8985 ± 0.0037 |0.9426 ± 0.0019 |0.8744 ± 0.0077 |0.9612 ± 0.0015 |0.9178 ± 0.0019 |0.8802 | 
+
+
+## 📦 PEFT Integration
+
+Our AdaMSS has been integrated into the PEFT package!!!! Please check here for more details of peft integration: [AdaMSS-PEFT](https://github.com/huggingface/peft/tree/main/examples/adamss_finetuning)
