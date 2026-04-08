@@ -41,3 +41,19 @@ If you find this work or code useful, please consider citing:
 ## 📦 PEFT Integration
 
 Our AdaMSS has been integrated into the PEFT package!!!! Please check here for more details of peft integration: [AdaMSS-PEFT](https://github.com/huggingface/peft/tree/main/examples/adamss_finetuning)
+
+###  Example Usage of AdaMSS
+
+```bash
+from peft import AdamssConfig, get_peft_model
+
+# Configure AdaMSS with ASA
+config = AdamssConfig(
+    r=100,                          # SVD rank (full decomposition rank)
+    num_subspaces=10,               # Number of subspaces (K) - initial capacity
+    subspace_rank=1,                # Rank per subspace (ri) - use 1 for NLU, 3 for Vision
+    target_modules=["query", "value"],  # Target attention layers
+    modules_to_save=["classifier"], # Modules to train without decomposition
+)
+peft_model = get_peft_model(model, config)
+```
