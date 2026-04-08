@@ -47,7 +47,7 @@ Our AdaMSS has been integrated into the PEFT package!!!! Please check here for m
 ```bash
 from peft import AdamssConfig, get_peft_model
 
-# Configure AdaMSS with ASA
+# Configure AdaMSS without ASA
 config = AdamssConfig(
     r=100,                          # SVD rank (full decomposition rank)
     num_subspaces=10,               # Number of subspaces (K) - initial capacity
