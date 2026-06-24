@@ -7,8 +7,8 @@ This repository contains the official PyTorch implementation of **AdaMSS (Adapti
 ##  🔧 Installation
 
 ```bash
-git clone https://github.com/jzheng20/AdaMSS.git
-cd AdaMSS
+git clone https://github.com/jzheng20/NeurIPS2025-AdaMSS.git
+cd NeurIPS2025-AdaMSS
 conda create -n adamss python=3.12.2
 conda activate adamss
 pip install -r requirements.txt
